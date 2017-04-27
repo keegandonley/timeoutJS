@@ -154,15 +154,31 @@ timeout.pause();
                     <a name="resume"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5><pre>timeout.<strong>resume</strong>();</pre></h5>
+                            <h5><pre>timeout.<strong>resume</strong>(reset<small>[opt]</small>);</pre></h5>
                         </div>
                         <p class="mb-1">
                             After pause(), calling resume() allows the timeout event to be sent again timeout event from being sent.
+                            <br>
+                            Can be passed an optional flag whether or not to reset the timer. Passing <code>true</code> resets the timer
+                            to the intial value, while <code>false</code> doesn't. (Default behavior)
                         </p>
                         <br>
                         <pre class="demo">
-timeout.pause();
+// Reset the timer on resume
+timeout.resume(true);
+
+// Don't reset the timer
+timeout.resume(false);
+
+// Don't reset the timer (default)
+timeout.resume();
+
                         </pre>
+                        <p class="mb-1">
+                            <em><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Note: <br>If the timer is not reset and the timeout speed is short, this may result in the timout triggering short after unpausing.
+                                If the timer was at 8/10 seconds when unpaused, it will time out in 2 seconds. Passing <code>true</code> is most useful for short timeouts
+                                when unpausing would result in an almost immediate timeout event. </em>
+                        </p>
                     </div>
                     <a name="getTime"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
