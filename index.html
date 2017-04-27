@@ -71,8 +71,15 @@
                     All that's required is the timeoutJS javascript file.
                     <br>
                     <h5>Downloads</h5>
-                    <span class="badge badge-info">prerelease</span> <span class="badge badge-default">latest</span> <strong>v.0.1.0</strong> &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/master/src/timeout.js">timeout.js</a>
-                    &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/master/src/timeout.min.js">timeout.min.js</a>
+                    <strong>v.0.1.0</strong> &emsp; <span class="badge badge-info">prerelease</span> <span class="badge badge-success">latest stable</span> &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/v.0.1.0/src/timeout.js"><i class="fa fa-arrow-down" aria-hidden="true"></i> timeout.js v.0.1.0</a>
+                    &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/v.0.1.0/src/timeout.min.js"> <i class="fa fa-arrow-down" aria-hidden="true"></i> timeout.min.js v.0.1.0</a>
+                    <br>
+                    <br>
+                    <strong>latest&nbsp;&nbsp;</strong> &emsp; <span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> potentially unstable</span> &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/master/src/timeout.js"><i class="fa fa-arrow-down" aria-hidden="true"></i> timeout.js</a>
+                    &emsp; <a href="https://raw.githubusercontent.com/keegandonley/timeoutJS/master/src/timeout.min.js"> <i class="fa fa-arrow-down" aria-hidden="true"></i> timeout.min.js</a>
+                    <br>
+                    <br>
+                    See <a href="#develop">Development Instructions</a> for how to install dev dependencies.
                 </p>
             </div>
         </div>
@@ -84,6 +91,7 @@
                 <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Documentation</h4>
 
                 <div class="list-group">
+                    <a name="newTimer"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>newTimer</strong>(seconds, callback);</pre></h5>
@@ -98,7 +106,7 @@ timeout.newTimer(120, function() {
 })
                         </pre>
                     </div>
-
+                    <a name="stop"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>stop</strong>();</pre></h5>
@@ -111,6 +119,7 @@ timeout.newTimer(120, function() {
 timeout.stop();
                         </pre>
                     </div>
+                    <a name="refresh"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>refresh</strong>();</pre></h5>
@@ -123,9 +132,10 @@ timeout.stop();
 timeout.refresh();
                         </pre>
                         <p class="mb-1">
-                            <em>Note: This is handled automatically whenever the user clicks anywhere on the page. Use this method to keep the session alive during other activities.</em>
+                            <em><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Note: <br>This is handled automatically whenever the user clicks anywhere on the page. Use this method to keep the session alive during other activities.</em>
                         </p>
                     </div>
+                    <a name="pause"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>pause</strong>();</pre></h5>
@@ -138,9 +148,10 @@ timeout.refresh();
 timeout.pause();
                         </pre>
                         <p class="mb-1">
-                            <em>Note: Useful during activities such as video playback when the user will not click for long periods of time.</em>
+                            <em><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Note: <br>Useful during activities such as video playback when the user will not click for long periods of time.</em>
                         </p>
                     </div>
+                    <a name="resume"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>resume</strong>();</pre></h5>
@@ -153,6 +164,7 @@ timeout.pause();
 timeout.pause();
                         </pre>
                     </div>
+                    <a name="getTime"></a>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h5><pre>timeout.<strong>getTime</strong>();</pre></h5>
@@ -168,6 +180,24 @@ timeout.getTime();
                 </div>
             </div>
         </div>
+        <a name="develop"></a>
+        <br>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-code-fork" aria-hidden="true"></i> Development</h4>
+                <p class="card-text">
+                    <ol>
+                    <li>Fork the code <a href="https://github.com/keegandonley/timeoutJS">on github<a></li>
+                    <li>Install <a href="https://nodejs.org/en/">NodeJS<a></li>
+                    <li>In your local directory, run <kbd>npm install</kbd> to install development dependencies</li>
+                    <li>Run <kbd>grunt</kbd> to lint and minify code, and run unit tests</li>
+                    </ol>
+
+                </p>
+            </div>
+        </div>
+        <br>
+        <br>
     </div>
 
 </body>
