@@ -1,0 +1,15 @@
+#navbarSupportedContent {
+    padding-top: 6px;
+}
+
+.git-link {
+    padding-left: 6px;
+}
+
+.fa-github {
+    color: grey;
+}
+
+.version {
+    padding-right: 10px;
+}

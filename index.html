@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/tether/dist/js/tether.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/fa/css/font-awesome.min.css">
+    <title>timeoutJS</title>
+
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light navbar-toggleable-md bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#top">timeoutJS.io</a>
+        <span class="navbar-text version">
+            v.0.0.1
+        </span>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item home-link">
+                    <a class="nav-link" href="#top">Home</a>
+                </li>
+                <li class="nav-item about-link">
+                    <a class="nav-link" href="#docs">Docs</a>
+                </li>
+                <li class="nav-item git-link">
+                    <a class="navbar-brand" href="https://www.github.com/keegandonley">
+                        <h3><i class="fa fa-github" aria-hidden="true"></i></h3>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <br>
+    <!-- Home -->
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-clock-o" aria-hidden="true"></i> Welcome</h4>
+                <p class="card-text">
+                    timeoutJS is a simple library to handle automatically 'timing out' a webpage after inactivity.
+                    <br>
+                    Initilizing a timer is as easy as passing a value in seconds for the timeout length, and a function to call when the timer runs out.
+                    <br>
+                    <br>
+                    The timer is automatically refreshed and started from 0 whenever a user clicks anywhere on the webpage.
+
+                </p>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Documentation</h4>
+
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>newTimer</strong>(seconds, callback);</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Initializes a timout counter that expires in the number of seconds provided. Callback is called once the timer has expired.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.newTimer(120, function() {
+    console.log("Timer has expired!");
+})
+                        </pre>
+                    </div>
+
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>stop</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Cancels a timeout counter.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.stop();
+                        </pre>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>refresh</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Manually reset the timeout counter back to 0.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.refresh();
+                        </pre>
+                        <p class="mb-1">
+                            <em>Note: This is handled automatically whenever the user clicks anywhere on the page. Use this method to keep the session alive during other activities.</em>
+                        </p>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>pause</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Keeps the timer set, simply pauses the timeout event from being sent.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.pause();
+                        </pre>
+                        <p class="mb-1">
+                            <em>Note: Useful during activities such as video playback when the user will not click for long periods of time.</em>
+                        </p>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>resume</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            After pause(), calling resume() allows the timeout event to be sent again timeout event from being sent.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.pause();
+                        </pre>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre>timeout.<strong>getTime</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Returns the interval that is set for a timeout.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.getTime();
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<footer>
+</footer>
