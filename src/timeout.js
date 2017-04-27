@@ -62,8 +62,17 @@
         };
 
         // Public - resume paused timeout behavior
-        timeout.resume = function resume() {
-            timedOut = false;
+        timeout.resume = function resume(reset) {
+            if (typeof reset === undefined) {
+                timedOut = false;
+            } else {
+                if (reset) {
+                    unset();
+                    set(uSec, uCB);
+                } else {
+                    timedOut = false;
+                }
+            }
         };
 
         // Public - timer keeps counting, but timeout behavior is paused
