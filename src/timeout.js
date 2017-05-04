@@ -2,10 +2,27 @@
 (function(window){
     'use strict';
     function define_timeout(){
-        var timeout = {}, timer, uSec, uCB, timedOut = false, delayVal;
+        var timer;
+        var uCB;
+        var timeout   = {};
+        timeout.count = {};
+        var uSec      = 0;
+        var timedOut  = false;
+        var delayVal  = 0;
+
+        var countData = {
+            seconds   : 0,
+            remaining : 0,
+            expired   : false,
+            timer     : null
+        };
+
+        var isCount = false;
+        var isTimer = false;
 
         // Sets a timer with the ID stored at timer
         function set(s, cb) {
+            isTimer = true;
             var ms   = s * 1000;
             timedOut = false;
             delayVal = s;
@@ -19,11 +36,35 @@
             return timer;
         }
 
+        function setCount(s, cb) {
+            isCount = true;
+            countData.seconds   = s;
+            countData.remaining = s;
+
+            countData.timer = setInterval(function() {
+                if (countData.remaining > 0) {
+                    countData.remaining = countData.remaining - 1;
+                } else {
+                    countData.expired = true;
+                    clearInterval(countData.timer);
+                    cb();
+                }
+            }, 1000);
+        }
+
         // Removes all timing information
         function unset() {
             timedOut = false;
             clearInterval(timer);
         }
+
+        timeout.isCount = function() {
+            return isCount;
+        };
+
+        timeout.isTimer = function() {
+            return isTimer;
+        };
 
         // Public - initializes a timer
         timeout.newTimer = function newTimer(seconds, callback) {
@@ -39,6 +80,34 @@
             uSec  = seconds;
             uCB   = callback;
             return set(uSec, uCB);
+        };
+
+        // Public - initializes a countdown
+        timeout.count.new = function (seconds, callback) {
+            if(typeof seconds === "undefined" || !callback) {
+                if(typeof seconds === "undefined") {
+                    console.error("timeoutjs at newCount()", "Specify a timeout length in seconds when calling timeout.newCount().");
+                }
+                if(!callback) {
+                    console.error("timeoutjs at newCount()", "Specify a callback for timeout event when calling timeout.newCount().");
+                }
+                return null;
+            }
+            setCount(seconds, callback);
+        };
+
+        // Gets the initial length of a count
+        timeout.count.length = function() {
+            return countData.seconds;
+        };
+
+        // Gets the remaining time of the count
+        timeout.count.remaining = function() {
+            return countData.remaining;
+        };
+
+        timeout.count.stop = function() {
+            clearInterval(countData.timer);
         };
 
         // Public - hard stop for a timer
@@ -59,6 +128,10 @@
                 unset();
                 return set(uSec, uCB);
             }
+        };
+
+        timeout.count.refresh = function() {
+            countData.remaining = countData.seconds;
         };
 
         // Public - resume paused timeout behavior
@@ -89,7 +162,12 @@
     if(typeof(timeout) === 'undefined'){
         window.timeout = define_timeout();
         window.document.onclick = function() {
-            timeout.refresh();
+            if (timeout.isTimer()) {
+                timeout.refresh();
+            }
+            if (timeout.isCount()) {
+                timeout.count.refresh();
+            }
         };
     }
 })(window);
