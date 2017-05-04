@@ -107,7 +107,7 @@
                         <pre class="demo">
 timeout.newTimer(120, function() {
     console.log("Timer has expired!");
-})
+});
                         </pre>
                     </div>
                     <a name="stop"></a>
@@ -198,6 +198,61 @@ timeout.getTime();
                         </pre>
                     </div>
                 </div>
+                <br>
+                <h5 class="card-title"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Experimental Features</h5>
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.new</strong>(seconds, callback);</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Initializes a new countdown. Countdowns maintain a counter as they approach the given time limit.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.count.new(120, function() {
+    console.log("Timer has expired!");
+});
+                        </pre>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.length</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Gets the initial length of the countdown timer.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.count.length();
+                        </pre>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.remaining</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Gets the remaining length of the countdown timer.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.count.remaining();
+                        </pre>
+                    </div>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.stop</strong>();</pre></h5>
+                        </div>
+                        <p class="mb-1">
+                            Stops the countdown timer.
+                        </p>
+                        <br>
+                        <pre class="demo">
+timeout.count.stop();
+                        </pre>
+                    </div>
+                </div>
+
             </div>
         </div>
         <a name="develop"></a>
