@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jshint: {
-            all: ['src/timeout.js', 'Gruntfile.js']
+            all: ['src/timeout.js', 'Gruntfile.js', 'test/spec.js', 'package.json']
         },
         uglify: {
             timeoutjs: {

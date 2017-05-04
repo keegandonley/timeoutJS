@@ -22,7 +22,7 @@
 
         // Sets a timer with the ID stored at timer
         function set(s, cb) {
-            isTimer = true;
+            isTimer  = true;
             var ms   = s * 1000;
             timedOut = false;
             delayVal = s;
@@ -37,7 +37,7 @@
         }
 
         function setCount(s, cb) {
-            isCount = true;
+            isCount             = true;
             countData.seconds   = s;
             countData.remaining = s;
 
