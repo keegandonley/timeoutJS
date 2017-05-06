@@ -1,24 +1,36 @@
-// timeoutjs.io
+// timeoutjs
+// www.timeoutjs.io
+// by Keegan Donley
+// www.keegandonley.com
+// www.github.com/keegandonley
+// kd@keegandonley.com
+
 (function(window){
     'use strict';
     function define_timeout(){
-        var timer;
-        var uCB;
-        var timeout   = {};
-        timeout.count = {};
-        var uSec      = 0;
-        var timedOut  = false;
-        var delayVal  = 0;
+        // Basic data for timeoutjs
+        var timer;              // Default timer, stores the ID
+        var uCB;                // Callback defined by the user
+        var timeout   = {};     // Timeout object
+        timeout.count = {};     // Beta features
+        var uSec      = 0;      // User defined number of seconds
+        var timedOut  = false;  // Used for default timer
+        var delayVal  = 0;      // Stores the value of the delay
 
+
+        // Date for beta features
         var countData = {
-            seconds   : 0,
-            remaining : 0,
-            expired   : false,
-            timer     : null
+            seconds   : 0,      // Initial value
+            remaining : 0,      // Remaning time (in seconds)
+            expired   : false,  // Has the timer been expired?
+            timer     : null    // Stores the ID of the count
         };
 
-        var isCount = false;
-        var isTimer = false;
+
+        // Keep track of which kind of counter was initilized
+        var isCount = false;    // Beta feature
+        var isTimer = false;    // Default timer type
+
 
         // Sets a timer with the ID stored at timer
         function set(s, cb) {
@@ -27,6 +39,7 @@
             timedOut = false;
             delayVal = s;
 
+            // Interval is set for the duration of the timer
             timer = setInterval(function() {
                 if (!timedOut) {
                     timedOut = true;
@@ -36,11 +49,17 @@
             return timer;
         }
 
+
+        // Sets the count (beta feature)
         function setCount(s, cb) {
             isCount             = true;
             countData.seconds   = s;
             countData.remaining = s;
 
+            // Interval is set for 1 second, and after each second
+            // re-evaluates the remaining time. Less efficient, but
+            // allows for determining how much time is left (i.e. countdown
+            // on-screen until timeout)
             countData.timer = setInterval(function() {
                 if (countData.remaining > 0) {
                     countData.remaining = countData.remaining - 1;
@@ -52,21 +71,27 @@
             }, 1000);
         }
 
-        // Removes all timing information
+
+        // Removes all timing information - default timer only
         function unset() {
             timedOut = false;
             clearInterval(timer);
         }
 
+
+        // Has a count been initiated?
         timeout.isCount = function() {
             return isCount;
         };
 
+
+        // Has a standard timer been initiated?
         timeout.isTimer = function() {
             return isTimer;
         };
 
-        // Public - initializes a timer
+
+        // Initializes a standard timer
         timeout.newTimer = function newTimer(seconds, callback) {
             if(typeof seconds === "undefined" || !callback) {
                 if(typeof seconds === "undefined") {
@@ -82,7 +107,8 @@
             return set(uSec, uCB);
         };
 
-        // Public - initializes a countdown
+
+        // Initializes a beta countdown
         timeout.count.new = function (seconds, callback) {
             if(typeof seconds === "undefined" || !callback) {
                 if(typeof seconds === "undefined") {
@@ -96,21 +122,26 @@
             setCount(seconds, callback);
         };
 
+
         // Gets the initial length of a count
         timeout.count.length = function() {
             return countData.seconds;
         };
+
 
         // Gets the remaining time of the count
         timeout.count.remaining = function() {
             return countData.remaining;
         };
 
+
+        // Stops a count from expiring
         timeout.count.stop = function() {
             clearInterval(countData.timer);
         };
 
-        // Public - hard stop for a timer
+
+        // Stops a timer from expiring
         timeout.stop = function stop() {
             if (!timer) {
                 console.error("timeoutjs at stop()", "Timer has not been properly initialized!");
@@ -118,7 +149,8 @@
             unset();
         };
 
-        // Public - restarts the timer
+
+        // Restarts the timer
         // Call this on an action to preserve the session
         timeout.refresh = function refresh() {
             if(typeof uSec === "undefined" || !uCB) {
@@ -130,9 +162,13 @@
             }
         };
 
+
+        // Restarts the countdown
+        // Call this on an action to preserve the session
         timeout.count.refresh = function() {
             countData.remaining = countData.seconds;
         };
+
 
         // Public - resume paused timeout behavior
         timeout.resume = function resume(reset) {
@@ -148,19 +184,28 @@
             }
         };
 
+
         // Public - timer keeps counting, but timeout behavior is paused
         timeout.pause = function pause() {
             timedOut = true;
         };
 
+
+        // Gets the initial time that was set
+        // NOTE: This is NOT the remaining time, but the initial value.
+        // If the remaining time is needed, a count should be initialized instead.
         timeout.getTime = function getTime() {
             return delayVal;
         };
 
+
         return timeout;
     }
     if(typeof(timeout) === 'undefined'){
+        // Define timeout namespace
         window.timeout = define_timeout();
+
+        // Listen for clicks and refresh the appropriate timer(s)
         window.document.onclick = function() {
             if (timeout.isTimer()) {
                 timeout.refresh();
