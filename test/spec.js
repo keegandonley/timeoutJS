@@ -25,6 +25,7 @@ describe("Testing General", function () {
     });
 });
 
+// ----- These tests are for the beta features -----
 describe("Testing beta features", function() {
     it("Initilizing count", function () {
         var timerID = timeout.count.new(3, function(){});
