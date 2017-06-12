@@ -203,16 +203,27 @@ timeout.getTime();
                 <div class="list-group">
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.new</strong>(seconds, callback);</pre></h5>
+                            <h5><pre><span class="badge badge-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> beta</span> timeout.<strong>count.new</strong>(seconds, callback, uiTarget[opt] );</pre></h5>
                         </div>
                         <p class="mb-1">
-                            Initializes a new countdown. Countdowns maintain a counter as they approach the given time limit.
+                            Initializes a new countdown. Countdowns maintain a counter as they approach the given time limit. 
+                            If passed a class of an html element as uiTarget, the default theme will be used to display a message on-screen, immediately
+                            before invoking the callback.  
                         </p>
                         <br>
                         <pre class="demo">
 timeout.count.new(120, function() {
     console.log("Timer has expired!");
-});
+}, "timeoutContainer");
+                        </pre>
+                        To use the UI functionality, your html file needs to have at minimum:
+                        <br>
+                        <br>
+                        <pre class="demo">
+&lt;script src="src/timeout.js">&lt;/script>
+&lt;link rel="stylesheet" href="theme/default.css" />
+
+&lt;div class="timeoutContainer">&lt;/div>
                         </pre>
                     </div>
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
