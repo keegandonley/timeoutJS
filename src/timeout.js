@@ -51,10 +51,11 @@
 
 
         // Sets the count (beta feature)
-        function setCount(s, cb) {
+        function setCount(s, cb, elem) {
             isCount             = true;
             countData.seconds   = s;
             countData.remaining = s;
+            var uiEnabled       = !!(elem);
 
             // Interval is set for 1 second, and after each second
             // re-evaluates the remaining time. Less efficient, but
@@ -66,9 +67,27 @@
                 } else {
                     countData.expired = true;
                     clearInterval(countData.timer);
-                    cb();
+                    if (uiEnabled) {
+                        uiGen(elem, cb);
+                    } else {
+                        cb();
+                    }
                 }
             }, 1000);
+        }
+
+        function uiGen(elem, cb) {
+            var markup  = document.createElement("div");
+            markup.className = "timeoutThemeContainer";
+            var inner = document.createElement("div");
+            inner.className = "timeoutContentContainer";
+            var p = document.createElement("p");
+            p.innerHTML = "<h4>Your page has timed out!</h4><br>Sorry about that!";
+            inner.appendChild(p);
+            markup.appendChild(inner);
+            document.getElementsByClassName(elem)[0].className = "timeoutWrapper";
+            document.getElementsByClassName("timeoutWrapper")[0].appendChild(markup);
+            cb();
         }
 
 
@@ -109,7 +128,7 @@
 
 
         // Initializes a beta countdown
-        timeout.count.new = function (seconds, callback) {
+        timeout.count.new = function (seconds, callback, element) {
             if(typeof seconds === "undefined" || !callback) {
                 if(typeof seconds === "undefined") {
                     console.error("timeoutjs at newCount()", "Specify a timeout length in seconds when calling timeout.newCount().");
@@ -119,7 +138,7 @@
                 }
                 return null;
             }
-            setCount(seconds, callback);
+            setCount(seconds, callback, element);
         };
 
 
