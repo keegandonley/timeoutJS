@@ -36,4 +36,13 @@ describe("Testing beta features", function() {
         var result1 = timeout.isCount();
         expect(result1).be.equal(true);
     });
+    it("Initilizing count with UI", function () {
+        var timerID = timeout.count.new(3, function(){}, "foo");
+        var length = timeout.count.length();
+        expect(length).be.equal(3);
+    });
+     it("Re-checking timer type", function() {
+        var result1 = timeout.isCount();
+        expect(result1).be.equal(true);
+    });
 });
